@@ -5,12 +5,11 @@
 
 import matplotlib
 
-matplotlib.use('Agg')  # Use non-interactive backend
+matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
 from typing import Dict
 import os
 
-# Try to import tkinter backend, but don't fail if not available
 try:
     from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -162,4 +161,5 @@ class DroneVisualizer:
 
         canvas = FigureCanvasTkAgg(figure, master=parent_frame)
         canvas.draw()
+
         return canvas
