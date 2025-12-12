@@ -5,11 +5,12 @@
 
 import matplotlib
 
-matplotlib.use('Agg') 
+matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 from typing import Dict
 import os
 
+# Try to import tkinter backend, but don't fail if not available
 try:
     from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -32,7 +33,16 @@ class DroneVisualizer:
         ]
 
     def create_pie_chart(self, data: Dict[str, float], title: str = "Распределение массы дрона") -> plt.Figure:
-     
+        """
+        Создает круговую диаграмму распределения массы
+
+        Args:
+            data: Словарь {компонент: масса}
+            title: Заголовок диаграммы
+
+        Returns:
+            Figure объект matplotlib
+        """
         if not data:
             # Создаем пустую диаграмму
             fig, ax = plt.subplots(figsize=(8, 6), facecolor='#2b2b2b')
@@ -84,6 +94,16 @@ class DroneVisualizer:
         return fig
 
     def create_bar_chart(self, data: Dict[str, float], title: str = "Масса компонентов") -> plt.Figure:
+        """
+        Создает столбчатую диаграмму массы компонентов
+
+        Args:
+            data: Словарь {компонент: масса}
+            title: Заголовок диаграммы
+
+        Returns:
+            Figure объект matplotlib
+        """
         if not data:
             fig, ax = plt.subplots(figsize=(8, 6), facecolor='#2b2b2b')
             ax.text(0.5, 0.5, 'Нет данных для отображения',
@@ -127,12 +147,19 @@ class DroneVisualizer:
         return fig
 
     def embed_figure_in_tkinter(self, figure: plt.Figure, parent_frame):
-    
+        """
+        Встраивает matplotlib figure в tkinter frame
+
+        Args:
+            figure: Matplotlib figure
+            parent_frame: Родительский tkinter frame
+
+        Returns:
+            Canvas объект или None если tkinter недоступен
+        """
         if not TKINTER_AVAILABLE or FigureCanvasTkAgg is None:
             return None
 
         canvas = FigureCanvasTkAgg(figure, master=parent_frame)
         canvas.draw()
-
         return canvas
-
