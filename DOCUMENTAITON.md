@@ -7,7 +7,7 @@
 ## Структура проекта
 
 ```
-drone_calculator/
+drone_calculator
 ├── main.py                          # Точка входа в приложение
 ├── requirements.txt                 # Зависимости Python
 ├── README.md                        # Руководство пользователя
